@@ -1,3 +1,5 @@
+package basic;
+
 import org.testng.annotations.*;
 
 public class AnnotationTests {
