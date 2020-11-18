@@ -36,8 +36,12 @@ public class DataPicker extends TestBase {
             goToTheMonth(expectedMonth);
         }
 
-        gotoTheDay(expectedDay);
+        selectDay(expectedDay);
 
+        assertDatesAreSetCorrectly(expectedYear, expectedMonth, expectedDay);
+    }
+
+    private void assertDatesAreSetCorrectly(Integer expectedYear, String expectedMonth, Integer expectedDay) {
         Assert.assertEquals(getDriver().findElement(By.id("datepicker")).getAttribute("value"),
                 ((getIndexOfMonth(expectedMonth) + 1) > 9 ? (getIndexOfMonth(expectedMonth) + 1) : "0" + (getIndexOfMonth(expectedMonth) + 1)) + "/"
                         + (expectedDay > 9 ? expectedDay.toString() : "0" + expectedDay) + "/"
@@ -48,7 +52,7 @@ public class DataPicker extends TestBase {
         return allMonthNames.indexOf(expectedMonth);
     }
 
-    private void gotoTheDay(Integer day) {
+    private void selectDay(Integer day) {
         List<WebElement> days = getDriver().findElements(By.cssSelector("td[data-handler='selectDay']:not(.ui-datepicker-other-month) a "));
 
         for (WebElement singleDay : days) {
